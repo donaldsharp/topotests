@@ -205,6 +205,19 @@ def test_mpls_interfaces():
             # Fix newlines (make them all the same)
             actual = ('\n'.join(actual.splitlines()) + '\n').splitlines(1)
 
+            # Sort lines which start with "ipv"
+            pattern = r'^ipv'
+            swapped = True
+            while swapped:
+                swapped = False
+                for j in range(1, len(actual)):
+                    if re.search(pattern, actual[j]) and re.search(pattern, actual[j-1]):
+                        if actual[j-1] > actual[j]:
+                            temp = actual[j-1]
+                            actual[j-1] = actual[j]
+                            actual[j] = temp
+                            swapped = True
+
             # Generate Diff
             diff = ''.join(difflib.context_diff(actual, expected, 
                 fromfile="actual MPLS LDP interface status", 
