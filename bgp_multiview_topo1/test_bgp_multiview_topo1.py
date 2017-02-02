@@ -310,28 +310,18 @@ def test_bgp_routingTable():
     # For debugging after starting FRR/Quagga daemons, uncomment the next line
     # CLI(net)
 
-def test_shutdown_check_stderr():
-    global fatal_error
+
+def test_shutdown_check_memleak():
     global net
 
-    # Skip if previous fatal error condition is raised
-    if (fatal_error != ""):
-        pytest.skip(fatal_error)
-
-    if os.environ.get('TOPOTESTS_CHECK_STDERR') is None:
-        pytest.skip('Skipping test for Stderr output and memory leaks')
-
+    if os.environ.get('TOPOTESTS_CHECK_MEMLEAK') is None:
+        pytest.skip('Skipping test for memory leaks')
+    
     thisDir = os.path.dirname(os.path.realpath(__file__))
 
-    print("\n\n** Verifing unexpected STDERR output from daemons")
-    print("******************************************\n")
-
-    net['r1'].stopRouter()
-
-    log = net['r1'].getStdErr('bgpd')
-    print("\nBGPd StdErr Log:\n" + log)
-    log = net['r1'].getStdErr('zebra')
-    print("\nZebra StdErr Log:\n" + log)
+    for i in range(1, 2):
+        net['r%s' % i].stopRouter()
+        net['r%s' % i].report_memory_leaks(os.environ.get('TOPOTESTS_CHECK_MEMLEAK'), os.path.basename(__file__))
 
 
 if __name__ == '__main__':

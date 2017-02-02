@@ -242,6 +242,36 @@ class Router(Node):
                 else:
                     linklocal += [[interface, local]]
         return linklocal
+    def report_memory_leaks(self, filename_prefix, testscript):
+        "Report Memory Leaks to file prefixed with given string"
+
+        leakfound = False
+        filename = filename_prefix + re.sub(r"\.py", "", testscript) + ".txt"
+        for daemon in self.daemons:
+            if (self.daemons[daemon] == 1):
+                log = self.getStdErr(daemon)
+                if "memstats" in log:
+                    # Found memory leak
+                    print("\nRouter %s %s StdErr Log:\n%s" % (self.name, daemon, log))        
+                    if not leakfound:
+                        leakfound = True
+                        # Check if file already exists
+                        fileexists = os.path.isfile(filename)
+                        leakfile = open(filename, "a")
+                        if not fileexists:
+                            # New file - add header
+                            leakfile.write("# Memory Leak Detection for topotest %s\n\n" % testscript)
+                        leakfile.write("## Router %s\n" % self.name)
+                    leakfile.write("### Process %s\n" % daemon)
+                    log = re.sub("core_handler: ", "", log)
+                    log = re.sub(r"(showing active allocations in memory group [a-zA-Z0-9]+)", r"\n#### \1\n", log)
+                    log = re.sub("memstats:  ", "    ", log)
+                    leakfile.write(log)
+                    leakfile.write("\n")
+        if leakfound:
+            leakfile.close()
+        return leakfound
+
 
 class LegacySwitch(OVSSwitch):
     "A Legacy Switch without OpenFlow"

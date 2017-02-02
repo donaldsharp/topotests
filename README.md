@@ -101,6 +101,19 @@ For the simulated topology, see the description in the python file
 If you need to clear the mininet setup between tests (if it isn't cleanly
 shutdown), then use the `mn -c` command to clean up the environment
 
+#### Collect Memory Leak Information
+
+FreeRangeRouting processes have the capabilities to report remaining memory
+allocations upon exit. To enable the reporting of the memory, define an
+enviroment variable `TOPOTESTS_CHECK_MEMLEAK` with the file prefix, ie
+
+	export TOPOTESTS_CHECK_MEMLEAK="/home/mydir/memleak_"
+
+This will enable the check and output to console and the writing of
+the information to files with the given prefix (followed by testname),
+ie `/home/mydir/memcheck_test_bgp_multiview_topo1.txt` in case of a 
+memory leak.
+
 ## License
 
 All the configs and scripts are licensed under a ISC-style license. See
