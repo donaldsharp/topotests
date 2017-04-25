@@ -119,7 +119,7 @@ class Router(Node):
         rundaemons = self.cmd('ls -1 /var/run/%s/*.pid' % self.routertype)
         if rundaemons is not None:
             for d in StringIO.StringIO(rundaemons):
-                self.cmd('kill -7 `cat %s`' % d.rstrip())
+                self.cmd('kill -signal SIGUSR2 `cat %s`' % d.rstrip())
                 self.waitOutput()
     def removeIPs(self):
         for interface in self.intfNames():
