@@ -516,6 +516,9 @@ class Router(Node):
         # Enable forwarding on the router
         assert_sysctl(self, 'net.ipv4.ip_forward', 1)
         assert_sysctl(self, 'net.ipv6.conf.all.forwarding', 1)
+	# Enable tcp and udp to work within vrfs
+        assert_sysctl(self, 'net.ipv4.tcp_l3mdev_accept', 1)
+        assert_sysctl(self, 'net.ipv4.udp_l3mdev_accept', 1)
         # Enable coredumps
         assert_sysctl(self, 'kernel.core_uses_pid', 1)
         assert_sysctl(self, 'fs.suid_dumpable', 2)
