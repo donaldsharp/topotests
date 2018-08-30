@@ -32,7 +32,7 @@ from lib.ltemplate import *
 def test_add_routes():
     CliOnFail = None
     # For debugging, uncomment the next line
-    #CliOnFail = 'tgen.mininet_cli'
+    CliOnFail = 'tgen.mininet_cli'
     CheckFunc = 'ltemplateVersionCheck(\'3.1\')'
     #uncomment next line to start cli *before* script is run
     #CheckFunc = 'ltemplateVersionCheck(\'3.1\', cli=True)'
@@ -41,7 +41,7 @@ def test_add_routes():
 def test_adjacencies():
     CliOnFail = None
     # For debugging, uncomment the next line
-    #CliOnFail = 'tgen.mininet_cli'
+    CliOnFail = 'tgen.mininet_cli'
     CheckFunc = 'ltemplateVersionCheck(\'3.1\')'
     #uncomment next line to start cli *before* script is run
     #CheckFunc = 'ltemplateVersionCheck(\'3.1\', cli=True)'
@@ -50,7 +50,7 @@ def test_adjacencies():
 def test_check_routes():
     CliOnFail = None
     # For debugging, uncomment the next line
-    #CliOnFail = 'tgen.mininet_cli'
+    CliOnFail = 'tgen.mininet_cli'
     CheckFunc = 'ltemplateVersionCheck(\'3.1\')'
     #uncomment next line to start cli *before* script is run
     #CheckFunc = 'ltemplateVersionCheck(\'3.1\', cli=True)'
@@ -59,7 +59,7 @@ def test_check_routes():
 def test_check_close():
     CliOnFail = None
     # For debugging, uncomment the next line
-    #CliOnFail = 'tgen.mininet_cli'
+    CliOnFail = 'tgen.mininet_cli'
     CheckFunc = 'ltemplateVersionCheck(\'3.1\')'
     #uncomment next line to start cli *before* script is run
     #CheckFunc = 'ltemplateVersionCheck(\'3.1\', cli=True)'
@@ -68,7 +68,7 @@ def test_check_close():
 def test_check_timeout():
     CliOnFail = None
     # For debugging, uncomment the next line
-    #CliOnFail = 'tgen.mininet_cli'
+    CliOnFail = 'tgen.mininet_cli'
     CheckFunc = 'ltemplateVersionCheck(\'3.1\')'
     #uncomment next line to start cli *before* script is run
     #CheckFunc = 'ltemplateVersionCheck(\'3.1\', cli=True)'
@@ -77,7 +77,7 @@ def test_check_timeout():
 def test_cleanup_all():
     CliOnFail = None
     # For debugging, uncomment the next line
-    #CliOnFail = 'tgen.mininet_cli'
+    CliOnFail = 'tgen.mininet_cli'
     CheckFunc = 'ltemplateVersionCheck(\'3.1\')'
     #uncomment next line to start cli *before* script is run
     #CheckFunc = 'ltemplateVersionCheck(\'3.1\', cli=True)'
